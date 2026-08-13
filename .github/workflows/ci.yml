@@ -75,7 +75,7 @@ jobs:
         run: |
           echo "key_sha=$(printf '%b' "${EC2_KEY}" | tr -d '\r' | sha256sum | awk '{print $1}')"
           echo "key_len=${#EC2_KEY}"
-          echo "user=[${EC2_USER}] host=[${EC2_HOST}] dir=[${EC2_APP_DIR}]"
+          echo "user_len=${#EC2_USER} host_len=${#EC2_HOST} dir_len=${#EC2_APP_DIR}"
 
       - name: Deploy on EC2 (git pull + docker compose up -d --build)
         env:
