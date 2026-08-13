@@ -66,25 +66,13 @@ jobs:
         env:
           EC2_KEY: ${{ secrets.EC2_KEY }}
 
-      - name: Debug SSH setup
-        env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_USER: ${{ secrets.EC2_USER }}
-          EC2_APP_DIR: ${{ secrets.EC2_APP_DIR }}
-        run: |
-          echo "lines=$(wc -l < ec2_key.pem)"
-          echo "first=$(head -1 ec2_key.pem)"
-          echo "last=$(tail -1 ec2_key.pem)"
-          echo "sha256=$(sha256sum ec2_key.pem | awk '{print $1}')"
-          echo "user=[${EC2_USER}] host=[${EC2_HOST}] dir=[${EC2_APP_DIR}]"
-
       - name: Deploy on EC2 (git pull + docker compose up -d --build)
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_APP_DIR: ${{ secrets.EC2_APP_DIR }}
         run: |
-          ssh -vv -i ec2_key.pem ${EC2_USER}@${EC2_HOST} << EOF
+          ssh -i ec2_key.pem ${EC2_USER}@${EC2_HOST} << EOF
             set -e
             cd "${EC2_APP_DIR}"
 
