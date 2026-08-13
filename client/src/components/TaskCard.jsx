@@ -20,13 +20,13 @@ const TaskCard = ({ task, onDelete }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+    <div className="bg-gray-900 rounded-lg shadow-sm border border-gray-800 p-6 hover:shadow-md hover:border-gray-700 transition-shadow duration-200">
       <div className="flex justify-between items-start">
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2 break-words">
+          <h3 className="text-lg font-semibold text-white mb-2 break-words">
             {task.title}
           </h3>
-          <p className="text-gray-700 mb-3 break-words leading-relaxed">
+          <p className="text-gray-400 mb-3 break-words leading-relaxed">
             {task.description}
           </p>
           <div className="flex items-center text-sm text-gray-500">
@@ -50,7 +50,7 @@ const TaskCard = ({ task, onDelete }) => {
         <button
           onClick={handleDelete}
           disabled={isDeleting}
-          className="ml-4 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 p-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="ml-4 bg-red-900/20 hover:bg-red-900/40 text-red-400 hover:text-red-300 p-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
           title="Delete task"
         >
           {isDeleting ? (

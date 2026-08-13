@@ -63,18 +63,18 @@ function App() {
   // let sangam = 'unused variable here';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-950">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-gray-900 border-b border-gray-800">
         <div className="max-w-4xl mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Task Manager Edited</h1>
-              <p className="text-gray-600 mt-1">Simple task management for DevOps demo</p>
+              <h1 className="text-3xl font-bold text-white">Task Manager Edited</h1>
+              <p className="text-gray-400 mt-1">Simple task management for DevOps demo</p>
             </div>
             <button
               onClick={() => setIsDialogOpen(true)}
-              className="bg-black text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
             >
               Add Task
             </button>
@@ -88,8 +88,8 @@ function App() {
           <LoadingSpinner />
         ) : error ? (
           <div className="text-center py-12">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
-              <div className="text-red-600 mb-4">
+            <div className="bg-red-950 border border-red-800 rounded-lg p-6 max-w-md mx-auto">
+              <div className="text-red-400 mb-4">
                 <svg
                   className="w-12 h-12 mx-auto"
                   fill="none"
@@ -104,8 +104,8 @@ function App() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-red-800 mb-2">Error</h3>
-              <p className="text-red-700 mb-4">{error}</p>
+              <h3 className="text-lg font-medium text-red-200 mb-2">Error</h3>
+              <p className="text-red-300 mb-4">{error}</p>
               <button
                 onClick={handleRetry}
                 className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium transition-colors duration-200"
