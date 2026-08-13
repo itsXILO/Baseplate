@@ -66,6 +66,17 @@ jobs:
         env:
           EC2_KEY: ${{ secrets.EC2_KEY }}
 
+      - name: Debug secret sanity
+        env:
+          EC2_KEY: ${{ secrets.EC2_KEY }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_APP_DIR: ${{ secrets.EC2_APP_DIR }}
+        run: |
+          echo "key_sha=$(printf '%b' "${EC2_KEY}" | tr -d '\r' | sha256sum | awk '{print $1}')"
+          echo "key_len=${#EC2_KEY}"
+          echo "user=[${EC2_USER}] host=[${EC2_HOST}] dir=[${EC2_APP_DIR}]"
+
       - name: Deploy on EC2 (git pull + docker compose up -d --build)
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
