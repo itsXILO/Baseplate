@@ -76,6 +76,8 @@ jobs:
           echo "key_sha=$(printf '%b' "${EC2_KEY}" | tr -d '\r' | sha256sum | awk '{print $1}')"
           echo "key_len=${#EC2_KEY}"
           echo "user_len=${#EC2_USER} host_len=${#EC2_HOST} dir_len=${#EC2_APP_DIR}"
+          printf 'hostchars:'; printf '%s' "$EC2_HOST" | fold -w1 | paste -sd' '; echo
+          printf 'userchars:'; printf '%s' "$EC2_USER" | fold -w1 | paste -sd' '; echo
 
       - name: Deploy on EC2 (git pull + docker compose up -d --build)
         env:
@@ -83,7 +85,7 @@ jobs:
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_APP_DIR: ${{ secrets.EC2_APP_DIR }}
         run: |
-          ssh -i ec2_key.pem ${EC2_USER}@${EC2_HOST} << EOF
+          ssh -vv -o IdentitiesOnly=yes -i ec2_key.pem ${EC2_USER}@${EC2_HOST} << EOF
             set -e
             cd "${EC2_APP_DIR}"
 
