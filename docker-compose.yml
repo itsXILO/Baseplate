@@ -5,9 +5,28 @@ services:
     restart: always
     env_file:
       - ./server/.env
+    environment:
+      MONGO_URI: mongodb://mongo:27017/task-app
     ports:
       - "5000:5000"
-    
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  mongo:
+    image: mongo:8
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   frontend:
     build: ./client
     container_name: frontend
@@ -18,3 +37,6 @@ services:
       - "5173:5173"
     depends_on:
       - backend
+
+volumes:
+  mongo-data:
